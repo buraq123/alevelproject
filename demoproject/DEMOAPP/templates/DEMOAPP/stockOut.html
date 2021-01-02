@@ -1,0 +1,17 @@
+{% extends "DEMOAPP/base.html" %}
+{% block content %}
+<h1 class="display-4">Stock OUT</h1>
+<form action="" method="POST" autocomplete="off" >
+    {% csrf_token%}
+    {% if outOfStock %}<div >Insufficient Stock</div>{% endif %}
+    <label>Product</label>
+    <select name="productid">
+            {% for product in products %}
+                <option value="{{product.id}}">{{product.Name}}</option>
+            {% endfor %}
+    </select>
+    <label>Amount</label>
+    <input name="amount">
+    <button type="submit" class="btn btn-success"><i class="fas fa-database"></i>Submit</button>
+</form>
+{% endblock content %}

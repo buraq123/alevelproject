@@ -1,0 +1,35 @@
+{% extends "DEMOAPP/base.html" %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token%}
+<h1 class="display-4">Invoice List</h1>
+   <table class="table table-borderless">
+       <thead class="border-bottom font-weight-bold">
+            <tr>
+                <td style="text-decoration : underline">Product Name</td>
+                <td style="text-decoration : underline">Quantity</td>
+                <td style="text-decoration : underline">Price Per Unit</td>
+                <td style="text-decoration : underline">Total Price</td>
+                <td style="text-decoration : underline">Date</td>
+                <td style="text-decoration : underline">Entered By</td>
+            </tr>
+       </thead>
+        <body>
+            {% for invoice in invoices %}
+                    <tr>
+                        <td>{{invoice.Name}}</td>
+                        <td>{{invoice.amount}}</td>
+                        <td>{{invoice.priceperUnit}}</td>
+                        <td>{{invoice.totalprice}}</td>
+                        <td>{{invoice.date}}</td>
+                        <td>{{invoice.username}}</td>
+                        <td>
+                            <button type="submit" class="btn btn-success" name="selectedInvoiceId" value="{{invoice.id}}"><i
+                            ></i>Delete</button>
+                            </td>
+                    </tr>
+            {% endfor %}
+        </body>
+   </table>
+</form>
+{% endblock content %}

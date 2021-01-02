@@ -1,0 +1,25 @@
+{% extends "DEMOAPP/base.html" %}
+{% block content %}
+<h1 class="display-4">Stock in</h1>
+<form action="" method="POST" autocomplete="off" >
+    {% csrf_token%}
+    {% if outOfStock %}<div >Insufficient Stock</div>{% endif %}
+    <table class="table table-borderless">
+     <thead class="border-bottom font-weight-bold">
+        <tr>
+                <td>Product Name</td>
+        </tr>
+     </thead>
+        {% for product in products %}
+        <tr>
+            <td>
+                <button name="productid" type="submit" class="btn btn-success" value="{{product.id}}">
+                       {{product.name}}
+                </button>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "DEMOAPP/base.html" %}
+{% block content %}
+<h1 class="display-4">Product Update</h1>
+<form action="" method="POST" autocomplete="off" >
+    {% csrf_token%}
+    <label>Name</label>
+    <input name="Name" value="{{product.Name}}" required>
+    <label>Unit</label>
+     <select name="unit"  required>
+        {% for item in units %}
+            <option value="{{item}}"   {% if product.unit == item %} selected {% endif %}>{{item}}</option>
+        {% endfor %}
+    </select>
+    <label>Consumption Rate</label>
+    <input name="consrate" value="{{product.consrate}}" required >
+    <input name="delivery" value="{{product.delivery}}" required>
+        <button type="submit" class="btn btn-success"><i class="fas fa-database"></i>Submit</button>
+</form>
+{% endblock content %}
