@@ -2,6 +2,7 @@
 {% block content %}
 <form action="" method="post">
     {% csrf_token%}
+    {% if outOfStock %}<div >You can not delete this invoice</div>{% endif %}
 <h1 class="display-4">Invoice List</h1>
    <table class="table table-borderless">
        <thead class="border-bottom font-weight-bold">

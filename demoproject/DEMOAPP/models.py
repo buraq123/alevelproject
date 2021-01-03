@@ -77,6 +77,11 @@ class Invoice(models.Model):
         stock = Stock.create(self.productid, self.amount, self.date, self.id)
         stock.stockin()
 
+    def delete(self, *args, **kwargs):
+        stock = Stock.objects.filter(invoiceid=self.id).first()
+        Stock.validateAmount(stock.productid, self.amount)
+        stock.delete()
+        super(Invoice, self).delete(*args, **kwargs)
 
 class Stock(models.Model):
     productid = models.BigIntegerField()
@@ -88,29 +93,30 @@ class Stock(models.Model):
         db_table = "stock"
 
     @classmethod
-    def create(cls, productid, amount, date):
-        stock = cls(productid=productid, amount=amount, date=date)
+    def create(cls, productid, amount, date, invoiceid):
+        stock = cls(productid=productid, amount=amount, date=date, invoiceid=invoiceid)
         return stock
 
     def stockin(self):
         super(Stock, self).save()
 
-    def stockoutByOne(self):
-        super(Stock, self).save()
-
     @classmethod
     def stockOutByOne(cls, productid):
-        stock = Stock.create(productid=productid, date=date, amount=-1)
+        stock = Stock.create(productid=productid, date=date, amount=-1, invoiceid=None)
         stock.stockin()
 
     @classmethod
     def getProductAmount(cls, productid):
         return Stock.objects.filter(productid=productid).aggregate(amount=Sum('amount'))['amount']
 
-    def stockout(self, args, kwargs):
-        currentAmount = Stock.getProductAmount(self.productid)
-        if self.amount > currentAmount:
+    @classmethod
+    def validateAmount(cls, productid, outAmount):
+        currentAmount = Stock.getProductAmount(productid)
+        if outAmount > currentAmount:
             raise Exception("StockInsufficient")
+
+    def stockout(self, args, kwargs):
+        Stock.validateAmount(self.productid, self.amount)
         self.amount = -1 * self.amount
         super(Stock, self).save(*args, **kwargs)
 
