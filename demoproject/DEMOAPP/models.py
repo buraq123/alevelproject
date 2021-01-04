@@ -166,6 +166,15 @@ class Stock(models.Model):
             GROUP BY "productid",product."Name"''')
 
 
+    @classmethod
+    def graph(cls):
+     return Stock.objects.raw('''SELECT "productid" as id,SUM(amount) amount,product."Name" AS name 
+                        FROM stock 
+                        INNER JOIN product ON stock."productid"=product.id
+                        WHERE amount<0 
+                        GROUP BY "productid",product."Name"''')
+
+
 class NotificationListView(models.Model):
     name = models.CharField(max_length=15)
     orderamount = models.IntegerField()

@@ -156,3 +156,18 @@ def Notification(request):
 def saleinformation(request):
     context = {'info': Stock.mostsold()}
     return render(request, "DEMOAPP/saleinformation.html", context)
+
+def graph(request):
+    labels = []
+    data = []
+    for i in range(len(Stock.graph())):
+        labels.append(Stock.graph()[i].name)
+        data.append(Stock.graph()[i].amount)
+    return render(request,"DEMOAPP/graph.html", {'labels': labels, 'data': data})
+
+
+
+
+
+
+
