@@ -3,7 +3,7 @@
 {% block title %}Django Highcharts - Pie Chart{% endblock %}
 
 {% block content %}
-<h1>Pie Chart Population</h1>
+<h1>Pie Chart PRODUCTS</h1>
  <div id="container" style="width: 75%;">
     <canvas id="pie-chart"></canvas>
   </div>
@@ -16,7 +16,7 @@
           backgroundColor: [
             '#ff0000', '#0000ff', '#ff0080', '#73ffff', '#5c26ff', '#002db3', '#ffff26', '#4cff4c', '#ff00ff'
           ],
-          label: 'Population'
+          label: 'Products'
         }],
         labels: {{ labels|safe }}
       },

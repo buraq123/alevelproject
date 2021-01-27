@@ -162,7 +162,7 @@ def graph(request):
     data = []
     for i in range(len(Stock.graph())):
         labels.append(Stock.graph()[i].name)
-        data.append(Stock.graph()[i].amount)
+        data.append(Stock.graph()[i].amount * -1)
     return render(request,"DEMOAPP/graph.html", {'labels': labels, 'data': data})
 
 
