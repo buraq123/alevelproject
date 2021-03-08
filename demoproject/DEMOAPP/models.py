@@ -171,7 +171,7 @@ class Stock(models.Model):
      return Stock.objects.raw('''SELECT "productid" as id,SUM(amount) amount,product."Name" AS name 
                         FROM stock 
                         INNER JOIN product ON stock."productid"=product.id
-                        WHERE amount<0 
+                        WHERE amount<0 and "date"<=current_date and "date">=current_date-30
                         GROUP BY "productid",product."Name"''')
 
 
