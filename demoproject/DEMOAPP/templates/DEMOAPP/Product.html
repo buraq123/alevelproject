@@ -3,19 +3,28 @@
 <h1 class="display-4">Product Regsiter</h1>
 <form action="" method="POST" autocomplete="off" >
     {% csrf_token%}
-    <label>Name</label>
-    <input name="Name" type="text" required>
-    <label> Unit</label>
-    <select name="unit">
-        {% for item in units %}
-            <option value="{{item}}">{{item}}</option>
-        {% endfor %}
-    </select>
-    <label>Consumption Rate</label>
-    <input name="consrate" type="number" min="0" required >
-    <label>Delivery</label>
-    <input name="delivery" type="number" min="0" required>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Name</label>
+        <input name="Name" type="text" required>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Unit</label>
+        <select name="unit">
+            {% for item in units %}
+                <option value="{{item}}">{{item}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Consumption Rate</label>
+        <input name="consrate" type="number" min="0" required >
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Delivery</label>
+        <input name="delivery" type="number" min="0" required>
+    </div>
     <button type="submit" class="btn btn-success"><i class="fas fa-database"></i>Submit</button>
+
 </form>
 {{ error }}
 {% endblock content %}

@@ -1,6 +1,6 @@
 {% extends "DEMOAPP/base.html" %}
 {% block content %}
-
+<h1 class="display-4">REGISTER</h1>
 <form action="" method="post">
     {% csrf_token %}
     <input type="text" name="first_name" placeholder="First Name" required>
@@ -8,7 +8,7 @@
     <input type="text" name="username" placeholder="Username" required>
     <input type="email" name="email" placeholder="email" required>
     <input type="password" name="password" placeholder="Password" required>
-    <input type="Submit" >
+  <button type="submit" class="btn btn-success"><i class="fas fa-database"></i>Submit</button>
 </form>
 {{error}}
 

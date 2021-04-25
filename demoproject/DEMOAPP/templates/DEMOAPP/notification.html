@@ -1,21 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% extends "DEMOAPP/base.html" %}
+{% block content %}
+<h1 class="display-4">Product List</h1>
 <body>
-
- <table>
-    {% for i in notify %}
+<form action="" method="post">
+    {% csrf_token%}
+    <table class="table table-borderless">
+        <thead class="border-bottom font-weight-bold">
         <tr>
-            <td>{{i.name}}</td>
-            <td>{{i.id}}</td>
-            <td>{{i.orderamount}}</td>
-
+            <td style="text-decoration : underline">Product Name</td>
+            <td style="text-decoration : underline"> Product ID</td>
+            <td style="text-decoration : underline">Order Amount</td>
+            <td style="text-decoration : underline"> Needs to be Delivered in (days)</td>
         </tr>
 
+        {% for product in notify %}
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.id}}</td>
+            <td>{{product.orderamount}}</td>
+            <td>{{product.getbydate}}</td>
+        </tr>
     {% endfor %}
-   </table>
+    </table>
+</form>
 </body>
-</html>
+{% endblock content %}
